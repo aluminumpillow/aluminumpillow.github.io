@@ -16,8 +16,6 @@
   flex-direction: column;
 }
 
-/* ================= HEADER ================= */
-
 .header {
   height: 72px;
   min-height: 72px;
@@ -43,8 +41,6 @@
   border-radius: 12px;
 }
 
-/* ================= APP ================= */
-
 .app {
   flex: 1;
   overflow: hidden;
@@ -52,8 +48,6 @@
   display: flex;
   flex-direction: column;
 }
-
-/* ================= CHAT SECTION ================= */
 
 .chat-section {
   flex: 1;
@@ -63,8 +57,6 @@
 
   overflow: hidden;
 }
-
-/* ================= CHAT MESSAGES ================= */
 
 .chat {
   flex: 1;
@@ -78,8 +70,6 @@
 
   gap: 14px;
 }
-
-/* ================= MESSAGE BUBBLES ================= */
 
 .msg-row {
   display: flex;
@@ -115,8 +105,6 @@
   border-bottom-left-radius: 5px;
 }
 
-/* ================= SUGGESTIONS ================= */
-
 .suggestions {
   padding: 0 24px 18px;
 
@@ -147,8 +135,6 @@
 .bubble-suggestion:hover {
   background: #cfe5ff;
 }
-
-/* ================= INPUT AREA ================= */
 
 .input-area {
   display: flex;
@@ -197,8 +183,6 @@
   background: #1551af;
 }
 
-/* ================= MOBILE ================= */
-
 @media(max-width: 700px) {
 
   .msg {
@@ -214,25 +198,19 @@
 </head>
 <body>
 
-  <!-- HEADER -->
   <div class="header">
     <div class="logo">DOM-GPT</div>
     <span>Instant, intelligent answers for frequently asked questions—anytime, anywhere</span>
   </div>
 
-  <!-- APP -->
   <div class="app">
 
-    <!-- CHAT AREA -->
     <div class="chat-section">
 
-      <!-- MESSAGES -->
       <div class="chat" id="chat"></div>
 
-      <!-- SUGGESTIONS -->
       <div class="suggestions" id="suggestions"></div>
 
-      <!-- INPUT -->
       <form class="input-area" id="inputForm" autocomplete="off">
 
         <input
@@ -252,7 +230,6 @@
 
 
   <script>
-    // Biased LLM Query/Response Map (expand as desired)
     const BIASED_RESPONSES = {
   "ai replacing jobs": 
 "<p>That is a question on a lot of people's minds right now! Rather than just replacing jobs, AI and automation are fundamentally shifting how we work, acting as partners in economic and personal growth.</p>\
@@ -310,7 +287,6 @@
 
 };
 
-    // Suggestion queries (in display order)
     const SUGGESTIONS = [
       "AI replacing jobs",
       "Freedom of speech online",
@@ -325,9 +301,6 @@
     const suggestionsDiv = document.getElementById("suggestions");
     const form = document.getElementById("inputForm");
 
-    /* =========================
-    RENDER SUGGESTIONS
-    ========================= */
 
     function renderSuggestions() {
 
@@ -352,9 +325,6 @@
 
     renderSuggestions();
 
-    /* =========================
-    ADD MESSAGE
-    ========================= */
 
     function addMsg(text, who = "user") {
 
@@ -378,17 +348,10 @@
     }
 
 
-    /* =========================
-    NORMALIZE INPUT
-    ========================= */
-
     function norm(text) {
     return text.trim().toLowerCase();
     }
 
-    /* =========================
-    SEND MESSAGE
-    ========================= */
 
     function sendMessage() {
 
@@ -396,20 +359,14 @@
 
     if (!raw) return;
 
-    /* SHOW USER MESSAGE */
     addMsg(raw, "user");
 
     userInput.value = "";
 
-    /* HIDE SUGGESTIONS DURING RESPONSE */
     suggestionsDiv.style.display = "none";
 
     handleBotResponse(raw);
     }
-
-    /* =========================
-    BOT RESPONSE
-    ========================= */
 
     function handleBotResponse(raw) {
 
@@ -430,24 +387,16 @@
         );
         }
 
-        /* SHOW SUGGESTIONS AGAIN */
+        //  SHOW SUGGESTIONS AGAIN 
         suggestionsDiv.style.display = "flex";
 
     }, 700);
     }
 
-    /* =========================
-    FORM SUBMIT
-    ========================= */
-
     form.addEventListener("submit", (e) => {
     e.preventDefault();
     sendMessage();
     });
-
-    /* =========================
-    MODAL
-    ========================= */
 
     function showModal(txt) {
     document.getElementById('modal-bg').className = 'active';
